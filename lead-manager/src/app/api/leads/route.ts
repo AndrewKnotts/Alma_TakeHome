@@ -19,10 +19,10 @@ export async function POST(req: NextRequest) {
   const notes = String(form.get("notes") || "") || undefined;
 
   const parsed = leadSchema.safeParse({ firstName, lastName, email, linkedin, country, visas, notes });
-if (!parsed.success) {
-  const msg = parsed.error.issues.map((i: ZodIssue) => i.message).join(" • ");
-  return new NextResponse(msg, { status: 400 });
-}
+  if (!parsed.success) {
+    const msg = parsed.error.issues.map((i: ZodIssue) => i.message).join(" • ");
+    return new NextResponse(msg, { status: 400 });
+  }
 
   let resume: any = undefined;
   const file = form.get("resume");

@@ -1,4 +1,4 @@
-import { Lead } from './types';
+import { Lead } from "./types";
 
 const leads: Lead[] = [];
 
@@ -9,11 +9,11 @@ export const db = {
   add(lead: Lead) {
     leads.unshift(lead);
   },
-  updateState(id: string, state: Lead['state']) {
-    const idx = leads.findIndex(l => l.id === id);
+  updateState(id: string, state: Lead["state"]) {
+    const idx = leads.findIndex((l) => l.id === id);
     if (idx >= 0) leads[idx].state = state;
   },
   get(id: string) {
-    return leads.find(l => l.id === id);
-  }
+    return leads.find((l) => l.id === id);
+  },
 };

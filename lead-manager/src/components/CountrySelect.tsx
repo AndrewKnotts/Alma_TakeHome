@@ -1,7 +1,6 @@
-'use client';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { COUNTRIES } from '@/lib/countries';
-
+"use client";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { COUNTRIES } from "@/lib/countries";
 
 type Props = {
   name: string;
@@ -12,8 +11,8 @@ type Props = {
 
 export default function CountrySelect({
   name,
-  placeholder = 'Country of Citizenship',
-  defaultValue = '',
+  placeholder = "Country of Citizenship",
+  defaultValue = "",
   options = COUNTRIES,
 }: Props) {
   const [open, setOpen] = useState(false);
@@ -25,15 +24,15 @@ export default function CountrySelect({
 
   const filtered = useMemo(() => {
     const q = input.trim().toLowerCase();
-    return q ? options.filter(o => o.toLowerCase().includes(q)) : options;
+    return q ? options.filter((o) => o.toLowerCase().includes(q)) : options;
   }, [input, options]);
 
   useEffect(() => {
     function onDocClick(e: MouseEvent) {
       if (!boxRef.current?.contains(e.target as Node)) setOpen(false);
     }
-    document.addEventListener('mousedown', onDocClick);
-    return () => document.removeEventListener('mousedown', onDocClick);
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
   }, []);
 
   function selectValue(val: string) {
@@ -43,21 +42,21 @@ export default function CountrySelect({
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (!open && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+    if (!open && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
       setOpen(true);
       return;
     }
     if (!open) return;
-    if (e.key === 'ArrowDown') {
+    if (e.key === "ArrowDown") {
       e.preventDefault();
-      setHi(i => Math.min(i + 1, filtered.length - 1));
-    } else if (e.key === 'ArrowUp') {
+      setHi((i) => Math.min(i + 1, filtered.length - 1));
+    } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setHi(i => Math.max(i - 1, 0));
-    } else if (e.key === 'Enter') {
+      setHi((i) => Math.max(i - 1, 0));
+    } else if (e.key === "Enter") {
       e.preventDefault();
       if (filtered[hi]) selectValue(filtered[hi]);
-    } else if (e.key === 'Escape') {
+    } else if (e.key === "Escape") {
       setOpen(false);
     }
   }
@@ -76,18 +75,24 @@ export default function CountrySelect({
           aria-autocomplete="list"
           placeholder={placeholder}
           value={input}
-          onChange={(e) => { setInput(e.target.value); setOpen(true); setHi(0); }}
+          onChange={(e) => {
+            setInput(e.target.value);
+            setOpen(true);
+            setHi(0);
+          }}
           onFocus={() => setOpen(true)}
           onKeyDown={onKeyDown}
         />
-        <button
-          type="button"
-          className="combo-btn"
-          aria-label="Toggle country list"
-          onClick={() => setOpen(o => !o)}
-        >
+        <button type="button" className="combo-btn" aria-label="Toggle country list" onClick={() => setOpen((o) => !o)}>
           <svg width="14" height="9" viewBox="0 0 12 8" aria-hidden>
-            <path d="M1 1l5 5 5-5" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" opacity=".3"/>
+            <path
+              d="M1 1l5 5 5-5"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+              strokeLinecap="round"
+              opacity=".3"
+            />
           </svg>
         </button>
       </div>
@@ -102,9 +107,12 @@ export default function CountrySelect({
                 key={opt}
                 role="option"
                 aria-selected={sel}
-                className={`combo-option${active ? ' active' : ''}${sel ? ' selected' : ''}`}
+                className={`combo-option${active ? " active" : ""}${sel ? " selected" : ""}`}
                 onMouseEnter={() => setHi(idx)}
-                onMouseDown={(e) => { e.preventDefault(); selectValue(opt); }}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  selectValue(opt);
+                }}
               >
                 {opt}
               </li>
@@ -112,9 +120,7 @@ export default function CountrySelect({
           })}
         </ul>
       )}
-      {open && filtered.length === 0 && (
-        <div className="combo-empty">No matches</div>
-      )}
+      {open && filtered.length === 0 && <div className="combo-empty">No matches</div>}
     </div>
   );
 }

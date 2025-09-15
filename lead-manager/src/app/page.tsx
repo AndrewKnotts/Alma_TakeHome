@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { leadSchema, VISA_OPTIONS } from "@/lib/validation";
-import { COUNTRIES } from "@/lib/countries";
 import CountrySelect from "@/components/CountrySelect";
 
 export default function PublicFormPage() {
@@ -67,14 +66,15 @@ export default function PublicFormPage() {
   }
 
   return (
-    
     <div>
-      <div className='admin-button'>
-            {/* <a href="/" style={{ fontWeight: 800, fontSize: 22, letterSpacing: 0.3 }}>alma</a> */}
-            <nav style={{ marginLeft: 'auto' }}>
-              <a href="/login"><button className="secondary">Admin</button></a>
-            </nav>
-          </div>
+      <div className="admin-button">
+        {/* <a href="/" style={{ fontWeight: 800, fontSize: 22, letterSpacing: 0.3 }}>alma</a> */}
+        <nav style={{ marginLeft: "auto" }}>
+          <a href="/login">
+            <button className="secondary">Admin</button>
+          </a>
+        </nav>
+      </div>
       <div className="hero">
         <div className="hero-text">
           <img className="alma-icon" src="assets/icon_alma.svg" alt="" />

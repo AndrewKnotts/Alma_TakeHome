@@ -6,8 +6,8 @@ export interface Lead {
   lastName: string;
   email: string;
   linkedin: string;
-  country: string; 
-  visas: string[]; 
+  country: string;
+  visas: string[];
   resume?: {
     filename: string;
     mime: string;

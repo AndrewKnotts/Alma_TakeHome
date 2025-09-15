@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import '@fortawesome/fontawesome-svg-core/styles.css';
-import { config } from '@fortawesome/fontawesome-svg-core';
-config.autoAddCss = false; // prevent duplicate CSS injection
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+config.autoAddCss = false;
 
 export const metadata: Metadata = {
   title: "Lead Manager",
@@ -12,7 +15,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body style={{ fontFamily: "Inter, system-ui, sans-serif", background: "#ffffffff", color: "#111" }}>
+      <body className={inter.variable + " app-body"}>
         <div>
           <main>{children}</main>
         </div>
