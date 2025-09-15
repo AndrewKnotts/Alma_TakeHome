@@ -11,6 +11,9 @@
     "test:watch": "vitest --watch"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.0.1",
+    "@fortawesome/free-solid-svg-icons": "^7.0.1",
+    "@fortawesome/react-fontawesome": "^3.0.2",
     "@jsonforms/core": "^3.6.0",
     "@jsonforms/react": "^3.6.0",
     "@jsonforms/vanilla-renderers": "^3.6.0",

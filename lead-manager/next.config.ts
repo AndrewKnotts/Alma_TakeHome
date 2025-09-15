@@ -1,7 +1,10 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  devIndicators: {
+    buildActivity: false,            // 👈 hides the bottom-left dev badge
+    // buildActivityPosition: 'bottom-right', // (optional) move it instead
+  },
 };
 
 export default nextConfig;

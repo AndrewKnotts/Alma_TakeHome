@@ -1,11 +1,14 @@
-'use client';
-import { useState } from 'react';
-import { leadSchema, VISA_OPTIONS } from '@/lib/validation';
+"use client";
+import { useState } from "react";
+import { leadSchema, VISA_OPTIONS } from "@/lib/validation";
+import { COUNTRIES } from "@/lib/countries";
+import CountrySelect from "@/components/CountrySelect";
 
 export default function PublicFormPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+  const [resumeName, setResumeName] = useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -14,31 +17,32 @@ export default function PublicFormPage() {
     const form = e.currentTarget;
     const fd = new FormData(form);
 
-    const visas = fd.getAll('visas').map(String);
+    const visas = fd.getAll("visas").map(String);
     const data = {
-      firstName: String(fd.get('firstName') || ''),
-      lastName: String(fd.get('lastName') || ''),
-      email: String(fd.get('email') || ''),
-      country: String(fd.get('country') || ''),
-      linkedin: String(fd.get('linkedin') || ''),
-      visas: visas as typeof VISA_OPTIONS[number][],
-      notes: (String(fd.get('notes') || '') || undefined) as string | undefined,
+      firstName: String(fd.get("firstName") || ""),
+      lastName: String(fd.get("lastName") || ""),
+      email: String(fd.get("email") || ""),
+      country: String(fd.get("country") || ""),
+      linkedin: String(fd.get("linkedin") || ""),
+      visas: visas as (typeof VISA_OPTIONS)[number][],
+      notes: (String(fd.get("notes") || "") || undefined) as string | undefined,
     };
 
     const parsed = leadSchema.safeParse(data);
     if (!parsed.success) {
-      setErr(parsed.error.issues.map(({ message }) => message).join(' • '));
+      setErr(parsed.error.issues.map(({ message }) => message).join(" • "));
       return;
     }
 
     setSubmitting(true);
     try {
-      const res = await fetch('/api/leads', { method: 'POST', body: fd });
+      const res = await fetch("/api/leads", { method: "POST", body: fd });
       if (!res.ok) throw new Error(await res.text());
       setSubmitted(true);
       form.reset();
+      setResumeName(null);
     } catch (e: any) {
-      setErr(e.message || 'Submission failed');
+      setErr(e.message || "Submission failed");
     } finally {
       setSubmitting(false);
     }
@@ -46,76 +50,124 @@ export default function PublicFormPage() {
 
   if (submitted) {
     return (
-      <div className="card" style={{ maxWidth: 640, margin: '40px auto', textAlign: 'center' }}>
-        <img src="/icon.svg" alt="" width={44} height={44} style={{ marginBottom: 8 }} />
-        <h2 style={{ marginTop: 0 }}>Thank You</h2>
+      <div className="card" style={{ maxWidth: 640, margin: "40px auto", textAlign: "center" }}>
+        <img className="form-icon" src="assets/icon_form.svg" alt="" />
+        <h2 style={{ marginTop: 20 }}>Thank You</h2>
         <p className="subtle">
-          Your information was submitted to our team. Expect an email from <strong>hello@rialma.ai</strong>.
+          Your information was submitted to our team of immigration <br />
+          attorneys. Expect an email from hello@tryrialma.ai.
         </p>
         <div style={{ marginTop: 16 }}>
-          <a href="/"><button>Go Back to Homepage</button></a>
+          <a href="/">
+            <button className="standard-button submit-button">Go Back to Homepage</button>
+          </a>
         </div>
       </div>
     );
   }
 
   return (
+    
     <div>
+      <div className='admin-button'>
+            {/* <a href="/" style={{ fontWeight: 800, fontSize: 22, letterSpacing: 0.3 }}>alma</a> */}
+            <nav style={{ marginLeft: 'auto' }}>
+              <a href="/login"><button className="secondary">Admin</button></a>
+            </nav>
+          </div>
       <div className="hero">
-        <h1>Get An Assessment Of Your Immigration Case</h1>
+        <div className="hero-text">
+          <img className="alma-icon" src="assets/icon_alma.svg" alt="" />
+          <h1>
+            Get An Assessment<br></br>Of Your Immigration Case
+          </h1>
+        </div>
       </div>
-      <div className="card" style={{ maxWidth: 680, margin: '0 auto' }}>
-        {err && <p style={{ color: '#b00020' }}>{err}</p>}
-        <form onSubmit={onSubmit}>
-          <div className="grid">
+      <div className="card" style={{ maxWidth: 680, margin: "0 auto" }}>
+        <form className="lead-form" onSubmit={onSubmit}>
+          <div className="input-label">
+            <img className="form-icon" src="assets/icon_form.svg" alt="" />
+            <div className="form-header">Want to understand your visa options?</div>
+            <div className="form-text">
+              Submit the form below and our team of experienced attorneys will review your information and send a
+              preliminary assessment of your case based on your goals.
+            </div>
+          </div>
+
+          <div className="input-list">
             <div>
-              <label>First Name *</label>
               <input name="firstName" required placeholder="First Name" />
             </div>
             <div>
-              <label>Last Name *</label>
               <input name="lastName" required placeholder="Last Name" />
             </div>
             <div>
-              <label>Email *</label>
               <input name="email" type="email" required placeholder="Email" />
             </div>
             <div>
-              <label>Country of Citizenship *</label>
-              <input name="country" required placeholder="Country of Citizenship" />
+              <CountrySelect name="country" />
             </div>
             <div>
-              <label>LinkedIn / Personal Website URL *</label>
-              <input name="linkedin" type="url" required placeholder="https://www.linkedin.com/in/…" />
+              <input name="linkedin" type="url" required placeholder="Linkedin / Personal Website URL" />
             </div>
             <div>
-              <label>Resume / CV (PDF preferred) *</label>
-              <input name="resume" type="file" accept=".pdf,.doc,.docx,.txt" required />
+              <input
+                id="resume"
+                name="resume"
+                type="file"
+                accept=".pdf,.doc,.docx,.txt"
+                required
+                className="sr-only-input"
+                onChange={(e) => setResumeName(e.currentTarget.files?.[0]?.name ?? null)}
+              />
+
+              <label htmlFor="resume" className="upload-resume-btn">
+                Upload Resume
+              </label>
+              <span
+                className={`file-name ${resumeName ? "" : "muted"}`}
+                aria-live="polite"
+                title={resumeName ?? "No file selected"}
+              >
+                {resumeName ?? "No file selected"}
+              </span>
             </div>
           </div>
 
-          <div style={{ display: 'grid', placeItems: 'center', margin: '18px 0' }}>
-            <img src="/dice.svg" alt="" width={36} height={36} />
+          <div className="input-label">
+            <img className="form-icon" src="assets/icon_dice.svg" alt="" />
+            <div className="form-header">Visa categories of interest?</div>
           </div>
 
-          <div style={{ marginTop: 6 }}>
-            <label>Visa categories of interest *</label>
+          <div>
             <div className="checkbox-row">
-              {['O-1', 'EB-1A', 'EB-2 NIW', "I don't know"].map(v => (
-                <label key={v} style={{ display: 'flex', gap: 8, alignItems: 'center', margin: 0 }}>
-                  <input type="checkbox" name="visas" value={v} /> {v}
+              {["O-1", "EB-1A", "EB-2 NIW", "I don't know"].map((v) => (
+                <label key={v} style={{ display: "flex", gap: 8, alignItems: "center", margin: 0 }}>
+                  <input className="visa-checkbox" type="checkbox" name="visas" value={v} /> {v}
                 </label>
               ))}
             </div>
           </div>
 
-          <div style={{ marginTop: 12 }}>
-            <label>How can we help you?</label>
-            <textarea name="notes" rows={5} placeholder="What is your current status and goals?" />
+          <div className="input-label">
+            <img className="form-icon" src="assets/icon_heart.svg" alt="" />
+            <div className="form-header">How can we help you?</div>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
-            <button disabled={submitting}>{submitting ? 'Submitting…' : 'Submit'}</button>
+          <div className="form-text-box">
+            <textarea
+              className="text-box"
+              name="notes"
+              rows={5}
+              placeholder="What is your current status, and when does it expire? What is your past immigration history? Are you looking for long-term permanent residency or short-term employment visa, or both? Are there any timeline considerations?"
+            />
+          </div>
+
+          <div className="submit-and-error">
+            <button className=" standard-button submit-button" disabled={submitting}>
+              {submitting ? "Submitting…" : "Submit"}
+            </button>
+            {err && <p style={{ color: "#b00020" }}>{err}</p>}
           </div>
         </form>
       </div>

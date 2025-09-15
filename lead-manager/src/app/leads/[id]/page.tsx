@@ -32,7 +32,7 @@ export default function LeadDetail() {
   if (!lead) return <div className="card" style={{ maxWidth: 740, margin: '0 auto' }}>Not found</div>;
 
   return (
-    <div className="card" style={{ maxWidth: 740, margin: '0 auto' }}>
+    <div className="card" style={{ maxWidth: 740, margin: '2rem auto' }}>
       <h2 style={{ marginTop: 0 }}>{lead.firstName} {lead.lastName}</h2>
 
       <div className="grid">

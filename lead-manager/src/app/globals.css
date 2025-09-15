@@ -26,16 +26,38 @@ select {
   color: #111;
   outline: none;
 }
+
 input::placeholder,
 textarea::placeholder {
   color: #bbb;
 }
+
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: #c8d0ff;
+  border-color: #ddc8ff;
   box-shadow: 0 0 0 3px #eef1ff;
 }
+
+.file-input::file-selector-button {
+  margin-right: 12px;
+  border: 0;
+  border-radius: 10px;
+  padding: 6px 12px;
+  background: #111; /* or var(--focus) */
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.file-input::file-selector-button:hover {
+  opacity: 0.6;
+}
+
+.file-input {
+  color: #a8a8a8;
+}
+
 button {
   border: 0;
   padding: 12px 16px;
@@ -47,41 +69,103 @@ button {
 button.secondary {
   background: #f3f4f6;
   color: #111;
+  transition: all 0.2s ease;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
+
+button.secondary:hover {
+  opacity: 0.7;
+}
+
+.standard-button {
+  opacity: 1;
+  transition: all 0.2s ease;
+}
+
+.standard-button:hover {
+  opacity: 0.6;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: black;
+}
+
 .card {
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 20px;
-  padding: 22px;
-  box-shadow: 0 6px 32px rgba(0, 0, 0, 0.06);
 }
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+
+.lead-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 10rem;
 }
-@media (max-width: 800px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
+
+.input-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 500px;
+  gap: 1rem;
+  padding: 3rem 0rem;
 }
+
+.form-icon {
+  max-width: 50px;
+}
+
+.alma-icon {
+  max-width: 75px;
+}
+
+.form-header {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.form-text {
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1.2rem;
+}
+
+.input-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  width: 400px;
+}
+
 .badge {
-  display: inline-block;
+  /* display: inline-block;
   padding: 4px 8px;
   border-radius: 999px;
   background: #f6f7fb;
   border: 1px solid #e9ebf5;
-  font-size: 12px;
+  font-size: 12px; */
+}
+.statuses {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 .status-pending {
-  color: #a88700;
+  color: white;
+  background-color: black;
+  padding: 4px 10px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.status-pending:hover {
+  opacity: 0.6;
 }
 .status-reached {
-  color: #0a8f5b;
+  color: #000000;
 }
 .table-wrap {
   overflow-x: auto;
-  background: #fff;
   border: 1px solid #eee;
   border-radius: 16px;
 }
@@ -96,7 +180,6 @@ button.secondary {
   text-align: left;
 }
 .table thead th {
-  background: #fafafa;
   border-bottom: 1px solid #eee;
   font-weight: 600;
   color: #333;
@@ -115,7 +198,7 @@ button.secondary {
   margin-bottom: 12px;
 }
 .input-pill {
-  border-radius: 999px;
+  border-radius: 10px;
   padding: 10px 14px;
   border: 1px solid #e6e6e6;
 }
@@ -127,41 +210,351 @@ button.secondary {
   padding: 12px 16px;
 }
 .pagination button {
-  background: #f3f4f6;
-  color: #111;
+  background: none !important;
+  color: #111 !important;
+  border-radius: 0 !important;
+  padding: 6px 10px;
 }
 .pagination .active {
   background: #111;
+  border: 1px solid black;
   color: #fff;
 }
 
 .pagination button:disabled {
   background: #e9e9ee;
   color: #9aa0a6;
-  cursor: not-allowed;
+  cursor: default;
   opacity: 0.6;
 }
 
 button:disabled {
-  cursor: not-allowed;
+  cursor: default;
 }
 
 .hero {
-  background: linear-gradient(180deg, #dfe8b8, #ffffff);
-  border-radius: 0 0 24px 24px;
+  background: #d9dea5;
   padding: 48px 24px;
   text-align: center;
   margin-bottom: 24px;
+  text-align: left;
+  display: flex;
+  justify-content: center;
+  padding: 3rem 2rem 6rem 2rem;
 }
 .hero h1 {
   margin: 0;
   font-size: 40px;
+  line-height: 2.8rem;
 }
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
 .subtle {
-  color: #666;
+  color: #000000;
+  font-weight: bold;
 }
 .checkbox-row {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 400px;
+  align-items: flex-start;
+  font-weight: bold;
+}
+
+.visa-checkbox {
+  width: unset;
+}
+
+.admin-button {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+}
+
+.alma-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.form-text-box {
+  width: 400px;
+}
+
+.text-box {
+  height: 150px;
+  font-family: sans-serif;
+}
+
+.submit-button {
+  width: 400px;
+  margin-top: 40;
+}
+
+.submit-and-error {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* Visually hide the real input but keep it accessible via the label */
+.sr-only-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* The custom button */
+.upload-resume-btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #111;
+  color: #fff; /* swap to your brand color if you want */
+  cursor: pointer;
+  margin-right: 10px;
+  transition: all 0.2s ease;
+}
+.upload-resume-btn:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 3px var(--focus-ring, rgba(107, 78, 255, 0.18));
+}
+
+.upload-resume-btn:hover {
+  opacity: 0.6;
+}
+
+/* Filename next to the button */
+.file-name {
+  display: inline-block;
+  max-width: 60ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  color: #111;
+  vertical-align: middle;
+}
+.file-name.muted {
+  color: #6b7280;
+}
+
+select {
+  appearance: none; /* remove native arrow */
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23111' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px; /* room for the arrow */
+}
+
+.combo {
+  position: relative;
+}
+.combo-wrap {
+  position: relative;
+}
+
+.combo-input {
+  width: 100%;
+  padding-right: 40px; /* space for button */
+}
+
+.combo-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 6px;
+  color: #111;
+  border-radius: 8px;
+}
+.combo-btn:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 3px var(--focus-ring, rgba(107, 78, 255, 0.18));
+}
+
+.combo-list {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  max-height: 240px;
+  overflow: auto;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 6px;
+  margin: 0;
+}
+.combo-option {
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.combo-option.active {
+  background: #f4f5ff;
+}
+.combo-option.selected {
+  font-weight: 600;
+}
+.combo-empty {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 10px;
+  color: #777;
+}
+
+.login-page {
+  display: flex;
+  width: 100%;
+  padding: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  padding: 2rem;
+}
+
+.leads-screen {
+  width: 100%;
+  display: flex;
+}
+
+.leads-left-nav {
+  width: 300px;
+  border-right: 1px solid rgb(225, 225, 225);
+  height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.alma-icon-large {
+  width: 110px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  gap: 1.4rem;
+  margin-bottom: auto;
+  margin-top: 6rem;
+}
+
+.profile {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 1rem;
+  background-color: rgb(213, 211, 211);
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-name {
+  font-weight: bold;
+}
+
+.leads-right {
+  padding: 1rem;
+  width: 100%;
+}
+
+.search-leads {
+  width: 300px;
+}
+
+.status-leads {
+  width: 100px;
+}
+
+/* Corner glow utility */
+.glow-corner {
+  position: relative; /* ensure the pseudo-element anchors here */
+  overflow: visible;
+  z-index: 0; /* content stays above by default */
+}
+
+/* customize via CSS variables if you want */
+.glow-corner::after {
+  --glow-color: rgba(218, 237, 75, 0.55); /* soft green (#4ADE80 w/ alpha) */
+  --glow-size: 500px;
+  --glow-blur: 28px;
+  --glow-opacity: 1;
+  --glow-y: -240px;
+  --glow-x: -240px;
+
+  content: "";
+  position: absolute;
+  width: var(--glow-size);
+  height: var(--glow-size);
+  left: var(--glow-x); /* default: top-right corner */
+  top: var(--glow-y);
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(var(--glow-blur));
+  opacity: var(--glow-opacity);
+  mix-blend-mode: multiply; /* softens against backgrounds */
+  background: radial-gradient(60% 60% at 50% 50%, var(--glow-color) 0%, rgba(74, 222, 128, 0) 70%);
+  transform: translateZ(0); /* helps GPU-accelerate on some browsers */
+}
+
+/* quick position variants */
+.glow-tl::after {
+  left: var(--glow-x);
+  top: var(--glow-y);
+  right: auto;
+  bottom: auto;
+}
+.glow-tr::after {
+  right: var(--glow-x);
+  top: var(--glow-y);
+  left: auto;
+  bottom: auto;
+}
+.glow-bl::after {
+  left: var(--glow-x);
+  bottom: var(--glow-y);
+  top: auto;
+  right: auto;
+}
+.glow-br::after {
+  right: var(--glow-x);
+  bottom: var(--glow-y);
+  top: auto;
+  left: auto;
 }

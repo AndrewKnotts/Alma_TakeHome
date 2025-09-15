@@ -1,0 +1,9 @@
+<svg width="88" height="77" viewBox="0 0 88 77" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 9C0 4.02944 4.02944 0 9 0H47H68C72.9706 0 77 4.02944 77 9V23.1V38.5V68C77 72.9706 72.9706 77 68 77H9C4.02944 77 0 72.9706 0 68V9Z" fill="#B6B5FF"/>
+<path d="M11 9C11 4.02944 15.0294 0 20 0H58H79C83.9706 0 88 4.02944 88 9V23.1V38.5V68C88 72.9706 83.9706 77 79 77H20C15.0294 77 11 72.9706 11 68V9Z" fill="#D0CEFF"/>
+<rect width="14" height="14" rx="7" transform="matrix(1 0 0 -1 43 46)" fill="#8584FF"/>
+<rect width="14" height="14" rx="7" transform="matrix(1 0 0 -1 23 66)" fill="#8584FF"/>
+<rect width="14" height="14" rx="7" transform="matrix(1 0 0 -1 23 27)" fill="#8584FF"/>
+<rect width="14" height="14" rx="7" transform="matrix(1 0 0 -1 63 27)" fill="#8584FF"/>
+<rect width="14" height="14" rx="7" transform="matrix(1 0 0 -1 63 66)" fill="#8584FF"/>
+</svg>
